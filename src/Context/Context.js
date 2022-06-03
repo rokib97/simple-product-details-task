@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useEffect, useReducer } from "react";
 export const ProductContext = createContext();
 const initialState = {
@@ -31,20 +32,22 @@ const Context = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    fetch(
-      `https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: "SUCCESS", payload: data });
+    // fetch(
+    //   `https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product`
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     dispatch({ type: "SUCCESS", payload: data });
+    //   })
+    //   .catch((e) => console.error(e));
+
+    axios
+      .get(
+        "https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product"
+      )
+      .then((res) => {
+        dispatch({ type: "SUCCESS", payload: res.data });
       });
-    // axios
-    //   .get(
-    //     "https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product"
-    //   )
-    //   .then((res) => {
-    //     dispatch({ type: "SUCCESS", payload: res.data });
-    //   });
   }, []);
 
   return (
