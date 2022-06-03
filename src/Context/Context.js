@@ -36,7 +36,6 @@ const Context = ({ children }) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         dispatch({ type: "SUCCESS", payload: data });
       });
     // axios
