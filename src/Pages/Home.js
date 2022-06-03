@@ -40,6 +40,14 @@ const Home = () => {
               <span className="ms-4 text-decoration-line-through">
                 ${p?.price?.old}
               </span>
+              <span className="ms-4 fs-4 text-danger fw-bolder">
+                (
+                {(
+                  ((p?.price?.old - p?.price?.discounted) / p?.price?.old) *
+                  100
+                ).toFixed()}
+                % OFF)
+              </span>
             </h6>
           ))}
 
