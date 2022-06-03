@@ -9,7 +9,13 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "SUCCESS":
       return {
+        state,
         product: action.payload,
+      };
+    case "COLORNAME":
+      return {
+        ...state,
+        color: action.payload,
       };
     default:
       return state;
@@ -29,7 +35,13 @@ const Context = ({ children }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={state.product}>
+    <ProductContext.Provider
+      value={{
+        product: state.product,
+        productDitchpatch: dispatch,
+        color: state.color,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );

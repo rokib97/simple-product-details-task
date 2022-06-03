@@ -4,7 +4,7 @@ import { ProductContext } from "../Context/Context";
 import Gallery from "./Gallery";
 
 const Home = () => {
-  const product = useContext(ProductContext);
+  const { product, productDitchpatch, color } = useContext(ProductContext);
   console.log(product);
 
   return (
@@ -25,29 +25,45 @@ const Home = () => {
             <span className="fw-bold">Price</span>:
           </h6>
           <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
-            <span className="fw-bold mt-2">Color</span>:<div></div>
+            <span className="fw-bolder mt-2">Color</span>: {color}
             <div className="d-flex">
               <div className="mt-2 me-3">
-                <button className="btn btn-light shadow">
-                  <Card style={{ width: "6rem" }}>
-                    <Card.Img
-                      variant="top"
-                      className="p-2"
-                      src={product?.variation?.props[0]?.values[0]?.thumb}
-                    />
-                  </Card>
-                </button>
+                <Card
+                  onClick={() =>
+                    productDitchpatch({
+                      type: "COLORNAME",
+                      payload: product?.variation?.props[0]?.values[0]?.title,
+                    })
+                  }
+                  style={
+                    color === "Black"
+                      ? { width: "6rem", border: "3px solid red" }
+                      : { width: "6rem" }
+                  }
+                >
+                  <Card.Img
+                    variant="top"
+                    className="p-2"
+                    src={product?.variation?.props[0]?.values[0]?.thumb}
+                  />
+                </Card>
               </div>
               <div className="mt-2">
-                <button className="btn btn-light shadow">
-                  <Card style={{ width: "6rem" }}>
-                    <Card.Img
-                      variant="top"
-                      className="p-1"
-                      src={product?.variation?.props[0]?.values[1]?.thumb}
-                    />
-                  </Card>
-                </button>
+                <Card
+                  onClick={() =>
+                    productDitchpatch({
+                      type: "COLORNAME",
+                      payload: product?.variation?.props[0]?.values[1]?.title,
+                    })
+                  }
+                  style={{ width: "6rem" }}
+                >
+                  <Card.Img
+                    variant="top"
+                    className="p-2"
+                    src={product?.variation?.props[0]?.values[1]?.thumb}
+                  />
+                </Card>
               </div>
             </div>
           </h6>
