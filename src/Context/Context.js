@@ -22,6 +22,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         size: action.payload,
+        price: action.pricePayload,
       };
     default:
       return state;
@@ -48,6 +49,7 @@ const Context = ({ children }) => {
         color: state.color,
         size: state.size,
         image: state.image,
+        price: state.price,
       }}
     >
       {children}
