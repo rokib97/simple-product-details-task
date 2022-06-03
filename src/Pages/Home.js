@@ -4,7 +4,7 @@ import Gallery from "./Gallery";
 
 const Home = () => {
   const product = useContext(ProductContext);
-  console.log(product.gallery);
+  console.log(product);
   return (
     <div className="container mt-5">
       <div className="row">
@@ -15,8 +15,13 @@ const Home = () => {
             ))}
           </div>
         </div>
-        <div className="col-lg-6 bg-danger">
-          <h2>Right sigth</h2>
+        <div className="col-lg-6">
+          <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
+            <span className="fw-bold">Product Title</span>: {product.title}
+          </h6>
+          <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
+            <span className="fw-bold">Price</span>:
+          </h6>
         </div>
       </div>
     </div>
