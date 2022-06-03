@@ -78,8 +78,9 @@ const Home = () => {
           <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
             <span className="fw-bold">Size</span>: {size}
             <div className="mt-3">
-              {product?.variation?.props[1]?.values.map((value) => (
+              {product?.variation?.props[1]?.values.map((value, index) => (
                 <button
+                  key={index}
                   style={
                     size === value?.title ? { border: "3px solid red" } : {}
                   }

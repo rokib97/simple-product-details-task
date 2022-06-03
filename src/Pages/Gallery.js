@@ -7,13 +7,15 @@ const Gallery = ({ img }) => {
 
   const { url } = img;
   return (
-    <div className="col-lg-6">
-      <img
-        className="w-100 rounded-2"
-        src={color && size ? image : url}
-        alt=""
-      />
-    </div>
+    <>
+      <div className={color && size ? "col-lg-12" : "col-lg-6"}>
+        <img
+          className="w-100 rounded-2"
+          src={color && size ? image : url}
+          alt=""
+        />
+      </div>
+    </>
   );
 };
 
