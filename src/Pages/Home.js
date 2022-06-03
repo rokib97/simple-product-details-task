@@ -8,7 +8,7 @@ const Home = () => {
     useContext(ProductContext);
 
   const filtered = price?.filter(
-    (p) => p.props[1] === size.id && p.props[0] === color.id
+    (p) => p?.props[1] === size?.id && p.props[0] === color?.id
   );
 
   return (
@@ -29,7 +29,7 @@ const Home = () => {
         </div>
         <div className="col-lg-6">
           <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
-            <span className="fw-bold">Product Title</span>: {product.title}
+            <span className="fw-bold">Product Title</span>: {product?.title}
           </h6>
           {filtered?.map((p, index) => (
             <h6
@@ -37,12 +37,12 @@ const Home = () => {
               className="bg-white text-dark p-4 shadow-lg rounded-3"
             >
               <span className="fw-bolder">Price</span>: ${p?.price?.discounted}
-              <span className="ms-4">${p?.price?.old}</span>
+              <span className="ms-4 text-decoration-line-through">
+                ${p?.price?.old}
+              </span>
             </h6>
           ))}
-          <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
-            <span className="fw-bold">Price</span>:
-          </h6>
+
           <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
             <span className="fw-bolder mt-2">Color</span>: {color?.title}
             <div className="d-flex">
