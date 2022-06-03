@@ -10,6 +10,8 @@ const Home = () => {
   const filtered = price?.filter(
     (p) => p?.props[1] === size?.id && p.props[0] === color?.id
   );
+  const oldPrice = filtered?.map((p) => p?.price?.old);
+  const disCountedPrice = filtered?.map((p) => p?.price?.discounted);
 
   return (
     <div className="container mt-5">
@@ -31,26 +33,23 @@ const Home = () => {
           <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
             <span className="fw-bold">Product Title</span>: {product?.title}
           </h6>
-          {filtered?.map((p, index) => (
-            <h6
-              key={index}
-              className="bg-white text-dark p-4 shadow-lg rounded-3"
-            >
-              <span className="fw-bolder">Price</span>: ${p?.price?.discounted}
-              <span className="ms-4 text-decoration-line-through">
-                ${p?.price?.old}
-              </span>
-              <span className="ms-4 fs-4 text-danger fw-bolder">
-                (
-                {(
-                  ((p?.price?.old - p?.price?.discounted) / p?.price?.old) *
-                  100
-                ).toFixed()}
-                % OFF)
-              </span>
-            </h6>
-          ))}
-
+          <h6 className="bg-white text-dark p-4 shadow-lg rounded-3 fw-bold">
+            Price : {disCountedPrice}
+            <span className="ms-4 text-decoration-line-through">
+              {oldPrice}
+            </span>
+            <span className="ms-4 fs-4 text-danger fw-bolder">
+              {size && color
+                ? "(" +
+                  (
+                    ((parseInt(oldPrice) - parseInt(disCountedPrice)) /
+                      parseInt(oldPrice)) *
+                    100
+                  ).toFixed() +
+                  "% OFF)"
+                : ""}
+            </span>
+          </h6>
           <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
             <span className="fw-bolder mt-2">Color</span>: {color?.title}
             <div className="d-flex">
@@ -67,13 +66,17 @@ const Home = () => {
                   style={
                     color?.title ===
                     product?.variation?.props[0]?.values[0]?.title
-                      ? { width: "6rem", border: "3px solid red" }
-                      : { width: "6rem" }
+                      ? {
+                          width: "6rem",
+                          border: "3px solid red",
+                          cursor: "pointer",
+                        }
+                      : { width: "6rem", cursor: "pointer" }
                   }
                 >
                   <Card.Img
                     variant="top"
-                    className="p-2"
+                    className="p-2 cursor-pointer"
                     src={product?.variation?.props[0]?.values[0]?.thumb}
                   />
                 </Card>
@@ -91,8 +94,12 @@ const Home = () => {
                   style={
                     color?.title ===
                     product?.variation?.props[0]?.values[1]?.title
-                      ? { width: "6rem", border: "3px solid red" }
-                      : { width: "6rem" }
+                      ? {
+                          width: "6rem",
+                          border: "3px solid red",
+                          cursor: "pointer",
+                        }
+                      : { width: "6rem", cursor: "pointer" }
                   }
                 >
                   <Card.Img
