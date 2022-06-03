@@ -4,8 +4,8 @@ import { ProductContext } from "../Context/Context";
 import Gallery from "./Gallery";
 
 const Home = () => {
-  const { product, productDitchpatch, color } = useContext(ProductContext);
-  console.log(product);
+  const { product, productDitchpatch, color, size } =
+    useContext(ProductContext);
 
   return (
     <div className="container mt-5">
@@ -33,10 +33,12 @@ const Home = () => {
                     productDitchpatch({
                       type: "COLORNAME",
                       payload: product?.variation?.props[0]?.values[0]?.title,
+                      imgPayload:
+                        product?.variation?.props[0]?.values[0]?.image,
                     })
                   }
                   style={
-                    color === "Black"
+                    color === product?.variation?.props[0]?.values[0]?.title
                       ? { width: "6rem", border: "3px solid red" }
                       : { width: "6rem" }
                   }
@@ -54,9 +56,15 @@ const Home = () => {
                     productDitchpatch({
                       type: "COLORNAME",
                       payload: product?.variation?.props[0]?.values[1]?.title,
+                      imgPayload:
+                        product?.variation?.props[0]?.values[1]?.image,
                     })
                   }
-                  style={{ width: "6rem" }}
+                  style={
+                    color === product?.variation?.props[0]?.values[1]?.title
+                      ? { width: "6rem", border: "3px solid red" }
+                      : { width: "6rem" }
+                  }
                 >
                   <Card.Img
                     variant="top"
@@ -68,10 +76,18 @@ const Home = () => {
             </div>
           </h6>
           <h6 className="bg-white text-dark p-4 shadow-lg rounded-3">
-            <span className="fw-bold">Size</span>:
+            <span className="fw-bold">Size</span>: {size}
             <div className="mt-3">
               {product?.variation?.props[1]?.values.map((value) => (
-                <button className="btn btn-light w-25 shadow-lg m-2">
+                <button
+                  style={
+                    size === value?.title ? { border: "3px solid red" } : {}
+                  }
+                  onClick={() =>
+                    productDitchpatch({ type: "SIZE", payload: value?.title })
+                  }
+                  className="btn btn-secondary w-25 shadow-lg m-2"
+                >
                   {value.title}
                 </button>
               ))}
