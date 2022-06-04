@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useEffect, useReducer } from "react";
 export const ProductContext = createContext();
 const initialState = {
@@ -31,28 +32,14 @@ const Context = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    fetch(
-      `https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product`,
-      {
-        mode: "cors",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        dispatch({ type: "SUCCESS", payload: data });
-      });
-
-    /*   axios
+    axios
       .get(
-        "https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product"
+        "https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product",
+        { crossdomain: true }
       )
       .then((res) => {
         dispatch({ type: "SUCCESS", payload: res.data });
-      }); */
+      });
   }, []);
 
   return (
