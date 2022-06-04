@@ -32,10 +32,17 @@ const Context = ({ children }) => {
 
   useEffect(() => {
     fetch(
-      `https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product`
+      `https://moveon-api-server.sbox.ali2bd.net/api/v1/customer/dummy-product`,
+      {
+        mode: "cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         dispatch({ type: "SUCCESS", payload: data });
       });
 
