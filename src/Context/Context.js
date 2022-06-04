@@ -37,8 +37,7 @@ const Context = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: "SUCCESS", payload: data });
-      })
-      .catch((e) => console.error(e));
+      });
 
     /*   axios
       .get(
